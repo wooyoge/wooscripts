@@ -1,0 +1,69 @@
+#!name = 小红书增强
+#!desc = 去广告、净化首页、解除下载限制、画质增强、无水印保存
+#!author = wooyooge
+#!homepage = https://github.com/wooyoge/wooscripts
+#!icon = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Xiaohongshu.png
+#!date = 2026-01-29
+
+[Rule]
+
+[Rewrite]
+^https?:\/\/edith\.xiaohongshu\.com\/api\/sns\/v\d+\/note\/hot_topic reject-dict
+
+[Script]
+# 评论区视频下载（无水印）
+http-response ^https?:\/\/edith\.xiaohongshu\.com\/api\/sns\/v\d+\/interaction\/comment\/video\/download script-path=https://raw.githubusercontent.com/wooyoge/wooscripts/main/loon/xhs.js,requires-body=true,timeout=30,tag=评论视频下载
+
+# 图片笔记增强（无水印、下载、画质增强）
+http-response ^https?:\/\/edith\.xiaohongshu\.com\/api\/sns\/v\d+\/note\/(imagefeed|feed) script-path=https://raw.githubusercontent.com/wooyoge/wooscripts/main/loon/xhs.js,requires-body=true,timeout=30,tag=图片笔记增强
+
+# 实况照片保存
+http-response ^https?:\/\/edith\.xiaohongshu\.com\/api\/sns\/v\d+\/note\/live_photo\/save script-path=https://raw.githubusercontent.com/wooyoge/wooscripts/main/loon/xhs.js,requires-body=true,timeout=30,tag=实况照片
+
+# UI 配置
+http-response ^https?:\/\/edith\.xiaohongshu\.com\/api\/sns\/v\d+\/system\/service\/ui\/config script-path=https://raw.githubusercontent.com/wooyoge/wooscripts/main/loon/xhs.js,requires-body=true,timeout=30,tag=UI配置
+
+# 系统配置
+http-response ^https?:\/\/edith\.xiaohongshu\.com\/api\/sns\/v\d+\/system_service\/config script-path=https://raw.githubusercontent.com/wooyoge/wooscripts/main/loon/xhs.js,requires-body=true,timeout=30,tag=系统配置
+
+# 笔记小组件净化
+http-response ^https?:\/\/edith\.xiaohongshu\.com\/api\/sns\/v\d+\/note\/widgets script-path=https://raw.githubusercontent.com/wooyoge/wooscripts/main/loon/xhs.js,requires-body=true,timeout=30,tag=小组件净化
+
+# 开屏广告
+http-response ^https?:\/\/edith\.xiaohongshu\.com\/api\/sns\/v\d+\/system_service\/splash_config script-path=https://raw.githubusercontent.com/wooyoge/wooscripts/main/loon/xhs.js,requires-body=true,timeout=30,tag=开屏广告
+
+# 搜索净化
+http-response ^https?:\/\/edith\.xiaohongshu\.com\/api\/sns\/v\d+\/search\/(banner_list|hot_list|hint|trending|notes) script-path=https://raw.githubusercontent.com/wooyoge/wooscripts/main/loon/xhs.js,requires-body=true,timeout=30,tag=搜索净化
+
+# 关注页信息流净化
+http-response ^https?:\/\/edith\.xiaohongshu\.com\/api\/sns\/v\d+\/user\/followings\/followfeed script-path=https://raw.githubusercontent.com/wooyoge/wooscripts/main/loon/xhs.js,requires-body=true,timeout=30,tag=关注页净化
+
+# 视频笔记增强 v3
+http-response ^https?:\/\/edith\.xiaohongshu\.com\/api\/sns\/v3\/note\/videofeed script-path=https://raw.githubusercontent.com/wooyoge/wooscripts/main/loon/xhs.js,requires-body=true,timeout=30,tag=视频v3
+
+# 关注列表
+http-response ^https?:\/\/edith\.xiaohongshu\.com\/api\/sns\/v4\/followfeed script-path=https://raw.githubusercontent.com/wooyoge/wooscripts/main/loon/xhs.js,requires-body=true,timeout=30,tag=关注列表
+
+# 视频笔记增强 v4
+http-response ^https?:\/\/edith\.xiaohongshu\.com\/api\/sns\/v4\/note\/videofeed script-path=https://raw.githubusercontent.com/wooyoge/wooscripts/main/loon/xhs.js,requires-body=true,timeout=30,tag=视频v4
+
+# 评论区增强
+http-response ^https?:\/\/edith\.xiaohongshu\.com\/api\/sns\/v5\/note\/comment\/list script-path=https://raw.githubusercontent.com/wooyoge/wooscripts/main/loon/xhs.js,requires-body=true,timeout=30,tag=评论列表
+
+# 评论子评论
+http-response ^https?:\/\/edith\.xiaohongshu\.com\/api\/sns\/v3\/note\/comment\/sub_comments script-path=https://raw.githubusercontent.com/wooyoge/wooscripts/main/loon/xhs.js,requires-body=true,timeout=30,tag=子评论
+
+# 推荐用户净化
+http-response ^https?:\/\/edith\.xiaohongshu\.com\/api\/sns\/v\d+\/recommend\/user\/follow_recommend script-path=https://raw.githubusercontent.com/wooyoge/wooscripts/main/loon/xhs.js,requires-body=true,timeout=30,tag=推荐净化
+
+# 首页信息流净化
+http-response ^https?:\/\/edith\.xiaohongshu\.com\/api\/sns\/v6\/homefeed script-path=https://raw.githubusercontent.com/wooyoge/wooscripts/main/loon/xhs.js,requires-body=true,timeout=30,tag=首页净化
+
+# 视频保存
+http-response ^https?:\/\/edith\.xiaohongshu\.com\/api\/sns\/v10\/note\/video\/save script-path=https://raw.githubusercontent.com/wooyoge/wooscripts/main/loon/xhs.js,requires-body=true,timeout=30,tag=视频保存
+
+# 搜索结果
+http-response ^https?:\/\/edith\.xiaohongshu\.com\/api\/sns\/v10\/search\/notes script-path=https://raw.githubusercontent.com/wooyoge/wooscripts/main/loon/xhs.js,requires-body=true,timeout=30,tag=搜索结果
+
+[MITM]
+hostname = edith.xiaohongshu.com
