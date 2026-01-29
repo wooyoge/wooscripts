@@ -1,15 +1,23 @@
 /**
- * @author fmz200，Baby
+ * @author fmz200, Baby, wooyooge
  * @function 小红书去广告、净化、解除下载限制、画质增强等
- * @date 2026-01-18 23:10:00
+ * @date 2026-01-29
  * @quote @RuCu6
+ * @supported Loon
  */
 
-const $ = new Env('小红书');
+// Loon 原生 API 兼容层（无需外部 Env 依赖）
+const $ = {
+  setdata(val, key) { return $persistentStore.write(val, key); },
+  getdata(key) { return $persistentStore.read(key); },
+  msg(title, subtitle, body) { $notification.post(title, subtitle, body); }
+};
+
+!(function () {
 const url = $request.url;
-let rsp_body = $response.body;
+const rsp_body = $response.body;
 if (!rsp_body) {
-  $done({});
+  return $done({});
 }
 let obj = JSON.parse(rsp_body);
 
@@ -434,6 +442,7 @@ if (url.includes("/api/sns/v1/interaction/comment/video/download?")) {
 }
 
 $done({body: JSON.stringify(obj)});
+})();
 
 // 小红书画质增强：加载2K分辨率的图片
 function imageEnhance(jsonStr) {
